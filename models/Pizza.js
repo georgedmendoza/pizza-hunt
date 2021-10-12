@@ -37,7 +37,8 @@ const PizzaSchema = new Schema({
 
 // get total cont of comments and replies on retrieval
 PizzaSchema.virtual('commentCount').get(function() {
-    return this.comments.length;
+    // reduce(accumulator, currentValue). Reduce is use to keep track
+    return this.comments.reduce((total, comment) => total + comment.replies.length + 1, 0);
 })
 
 // create the Pizza mode using the PizzaSchema
